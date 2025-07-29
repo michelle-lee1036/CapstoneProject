@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import SwiftData
 
 struct Location {
     let name: String
@@ -35,6 +36,7 @@ struct MapSlide: View {
     @State private var showNewYork = false
     @State private var showLine = false
     @State private var showLine2 = false
+    @State private var showField1 = true
     
     var body: some View {
         Map (position: $position){
@@ -66,19 +68,28 @@ struct MapSlide: View {
                                 position = MapCameraPosition.region(MKCoordinateRegion(center: coord, span: MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)))
                             }
                         }
+                        showField2 = false
                     }
-                } else {
+                } else if showField1 {
                     TextField("Enter Destination 1", text: $dest1)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button("Add") {
+                        
                         showLine = true
                         if locationDict[dest1] != nil {
                             if let coord = locationDict[dest1] {
                                 position = MapCameraPosition.region(MKCoordinateRegion(center: coord, span: MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)))
                             }
                         }
+                        showField1 = false
                         showField2 = true
                         
+                    }
+                } else {
+                    Button {
+                    } label: {
+                        Text("Next")
+                            .fontWeight(.bold)
                     }
                 }
             }
