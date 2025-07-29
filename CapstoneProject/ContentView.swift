@@ -24,6 +24,7 @@ struct MenuContent: View {
         MenuItem(text: "Health", imageName: "cross"),
         MenuItem(text: "something1", imageName: "person.circle"),
         MenuItem(text: "Share", imageName: "square.and.arrow.up")
+        //the last two button things can be deleted, I just added them to make the navigation bar thing work
     ]
     
     var body: some View {
@@ -121,7 +122,8 @@ struct ContentView: View {
                         .overlay(.black)
                         .padding(.bottom)
                     
-                    Text("Home 🏡")
+                    Text("Countdown Clock ⏰")
+                        .bold()
                     
                     if !countdownStarted {
                         VStack {
@@ -219,7 +221,9 @@ struct ContentView: View {
 }
 
 
-//how to add in navigation bar to the homepage so that the user can actually go to all the different slides that are going to be on the app.
-//i tried the .toolbar thing, but it keeps saying that the toolbar thing can't be used in the view scope and i'm not sure why when it literally works in the about me and the navigation app thing we worked on together as a class.
-//i also tried the other navigation bar thing that i out in the google doc (day 7), but it just looks unaesthetic, so i'm going to leave it as a last resort, also idk if the button thing on that work. (cause i have to remember that it has to be a navigation bar, not a bunch of displays)
- 
+//how to add in navigation bar to the homepage so that the user can actually go to all the different slides that are going to be on the app. (NEED BUTTONS, but HOW)
+//figured out the navigation bar thing
+//need to figure out how to make the countdown clock less work for user
+//we need to do the calculation, not them adding in all the hours, minutes, and seconds, and stuff
+
+//at the very end make everything look aesthetic with the nice colors
