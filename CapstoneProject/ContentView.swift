@@ -15,6 +15,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 20) {
+            Text("Hello")
             Text("Time Elapsed: \(timeElapsed) sec")
                 .onReceive(timer) { firedDate in
                     if !isPaused {
