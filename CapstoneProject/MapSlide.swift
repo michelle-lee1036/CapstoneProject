@@ -17,7 +17,8 @@ struct Location {
 let locations = [
     Location(name: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522)),
     Location(name: "Tokyo", coordinate: CLLocationCoordinate2D(latitude: 35.6764, longitude: 139.65)),
-    Location(name: "New York", coordinate: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060))
+    Location(name: "New York", coordinate: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060)),
+    Location(name: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.9072, longitude: -77.0369))
     
 ]
 
@@ -33,9 +34,9 @@ struct MapSlide: View {
     
     var body: some View {
         Map {
-            ForEach(locations, id: \.name) { location in
-                Marker(location.name, coordinate: location.coordinate)
-            }
+//            ForEach(locations, id: \.name) { location in
+//                Marker(location.name, coordinate: location.coordinate)
+//            }
             
         }
         VStack{
