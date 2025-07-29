@@ -1,51 +1,52 @@
-//
-//  ContentView.swift
-//  CapstoneProject
-//
-//  Created by Scholar on 7/28/25.
-//
-
 import SwiftUI
-
+import SwiftData
 struct ContentView: View {
-    @State private var timeElapsed = 0
-    @State private var startDate = Date()
-    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State private var isPaused = false
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("Hello")
-            Text("Time Elapsed: \(timeElapsed) sec")
-                .onReceive(timer) { firedDate in
-                    if !isPaused {
-                        timeElapsed = Int(firedDate.timeIntervalSince(startDate))
-                    }
-                }
-
-            HStack(spacing: 20) {
-                Button("Pause") {
-                    isPaused = true
-                }
-
-                Button("Resume") {
-                    isPaused = false
-                    startDate = Date().addingTimeInterval(-Double(timeElapsed)) // keep time continuity
-                }
-
-                Button("Reset") {
-                    isPaused = true
-                    timeElapsed = 0
-                    startDate = Date()
-                }
-            }
+  @State private var showNewItem = false
+  @Query var toDos: [ItemNeeded]
+  @Environment(\.modelContext) var modelContext
+  var body: some View {
+    VStack {
+      HStack {
+        Text("Packing List:")
+          .font(.system(size: 40))
+          .fontWeight(.black)
+        Spacer()
+        Button {
+          withAnimation {
+            showNewItem = true
+          }
+        } label: {
+          Text("+")
+            .font(.title)
+            .fontWeight(.bold)
         }
-        .font(.largeTitle)
-        .padding()
+      }
+      .padding()
+      Spacer()
+      List {
+        ForEach(toDos) { toDoItem in
+          if toDoItem.isImportant {
+            Text("‼️" + toDoItem.title)
+              .fontWeight(.bold)
+          } else {
+            Text(toDoItem.title)
+          }
+        }
+        .onDelete(perform: deleteToDo)
+      }
+      .listStyle(.plain)
     }
+    if showNewItem {
+      NewItineraryView(toDoItem: ItemNeeded(title: "", isImportant: false), showNewTask: $showNewItem)
+    }  }
+  func deleteToDo(at offsets: IndexSet) {
+    for offset in offsets {
+      let toDoItem = toDos [offset]
+      modelContext.delete(toDoItem)
+    }
+  }
 }
-
-
 #Preview {
     ContentView()
+        .modelContainer(for: ItemNeeded.self, inMemory: true)
 }
