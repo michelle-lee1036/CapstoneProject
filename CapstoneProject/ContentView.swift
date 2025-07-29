@@ -33,6 +33,7 @@ struct ContentView: View {
             .frame(height: 3)
             .overlay(.black)
             .padding()
+        
         Text("Home 🏡")
         
         VStack(spacing: 20) {
@@ -51,14 +52,14 @@ struct ContentView: View {
                         Stepper("Seconds: \(inputSeconds)", value: $inputSeconds, in: 0...59)
                     }
                 }
-                
-                Button("Start Countdown") {
-                    let totalSeconds = inputDays * 86400 + inputHours * 3600 + inputMinutes * 60 + inputSeconds
-                    timeRemaining = totalSeconds
-                    targetDate = Date().addingTimeInterval(Double(totalSeconds))
-                    isPaused = false
-                    countdownStarted = true
-                }
+                    
+                    Button("Start Countdown") {
+                        let totalSeconds = inputDays * 86400 + inputHours * 3600 + inputMinutes * 60 + inputSeconds
+                        timeRemaining = totalSeconds
+                        targetDate = Date().addingTimeInterval(Double(totalSeconds))
+                        isPaused = false
+                        countdownStarted = true
+                    }
             } else {
                 // Countdown display
                 Text("Time remaining: \(formatTime(seconds: timeRemaining))")
@@ -88,24 +89,21 @@ struct ContentView: View {
                         inputMinutes = 0
                         inputSeconds = 0
                         timeRemaining = 0
+                        
+                    }
+                    
+                    func formatTime(seconds: Int) -> String {
+                        let d = seconds / 86400
+                        let h = (seconds % 86400) / 3600
+                        let m = (seconds % 3600) / 60
+                        let s = seconds % 60
+                        return String(format: "%02dd %02dh %02dm %02ds", d, h, m, s)
                     }
                 }
-            }
-        }
-        .padding()
-        
-    }
-
-             func formatTime(seconds: Int) -> String {
-                 let d = seconds / 86400
-                 let h = (seconds % 86400) / 3600
-                 let m = (seconds % 3600) / 60
-                 let s = seconds % 60
-                 return String(format: "%02dd %02dh %02dm %02ds", d, h, m, s)
-             }
-         }
-
-
-#Preview {
-    ContentView()
-}
+                
+                
+                
+                #Preview {
+                    ContentView()
+                }
+            
