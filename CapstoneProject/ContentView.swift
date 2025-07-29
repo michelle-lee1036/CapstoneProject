@@ -8,6 +8,94 @@
 
 import SwiftUI
 
+
+struct MenuItem: Identifiable {
+    var id = UUID()
+    let text: String
+    let imageName: String
+    let handler: () -> Void = {
+        print("Tapped Item")
+    }
+}
+    struct MenuContent: View {
+        let items: [MenuItem] = [
+            MenuItem(text: "Home", imageName: "house"),
+            MenuItem(text: "Itinerary", imageName: "calendar"),
+            MenuItem(text: "Map", imageName: "map"),
+            MenuItem(text: "Health", imageName: "cross"),
+            MenuItem(text: "something1", imageName: "person.circle"),
+            MenuItem(text: "Share", imageName: "square.and.arrow.up"),
+    ]
+    
+    var body: some View {
+        ZStack {
+            Color(UIColor(red: 43/255.0,
+                          green: 40/255.0,
+                          blue: 74/255.0, alpha: 1))
+            
+            VStack(alignment: .leading, spacing: 0)  {
+                ForEach(items) { item in
+                    HStack {
+                        Image(systemName: item.imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.white)
+                            .frame(width: 32, height: 30, alignment: .center)
+                        
+                        Text(item.text)
+                            .foregroundColor(Color.white)
+                            .bold()
+                            .font(.system(size:22))
+                            .multilineTextAlignment(.leading)
+                        
+                        Spacer()
+                    }
+                    .onTapGesture {
+                        item.handler()
+                    }
+                    .padding()
+                    
+                    Divider()
+                }
+                Spacer()
+            }
+            .padding(.top, 25)
+        }
+    }
+}
+
+struct SideMenu: View {
+    let width: CGFloat
+    let menuOpened: Bool
+    let toggleMenu: () -> Void
+    
+    
+    var body: some View {
+        ZStack {
+            //Dimmed background
+            GeometryReader { _ in
+             EmptyView()
+            }
+            .background(Color.gray.opacity(0.5))
+            .opacity(self.menuOpened ? 1 : 0)
+            .onTapGesture {
+                withAnimation(.easeIn.delay(0.25)) {
+                    self.toggleMenu()
+                }
+            }
+            
+            //MenuContent
+            HStack {
+                MenuContent()
+                    .frame(width: width)
+                    .offset(x: menuOpened ? 0 : -width)
+              
+                
+                Spacer()
+            }
+        }
+    }
+}
 struct ContentView: View {
     @State private var inputDays = 0
     @State private var inputHours = 0
@@ -20,7 +108,42 @@ struct ContentView: View {
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var countdownStarted = false
     
+    //attempt at navigation bar
+    @State var menuOpened = false
+    
     var body: some View {
+        NavigationStack {
+            ZStack {
+            if !menuOpened {
+                Button(action: {
+                    //Open Menu
+                    self.menuOpened.toggle()
+                }, label: {
+                    Text("Open Menu")
+                        .bold()
+                        .foregroundColor(Color.white)
+                        .frame(width: 50, height: 50, alignment: .center)
+                        .background(Color(.systemBlue))
+                })
+                
+                SideMenu(width: UIScreen.main.bounds.width/1.6,
+                         menuOpened: menuOpened,
+                         toggleMenu: toggleMenu)
+            }
+            //.edgesIgnoringSafeArea(.all)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    self.menuOpened.toggle()
+                }) {
+                    Image(systemName: "line.horizontal.3")
+                        .imageScale(.large)
+                }
+            }
+        }
+        .navigationTitle("Home")
+    }
         //maybe add back the v stack
         Text("HEALTHMILES")
             .font(.largeTitle)
@@ -103,10 +226,20 @@ struct ContentView: View {
                  let m = (seconds % 3600) / 60
                  let s = seconds % 60
                  return String(format: "%02dd %02dh %02dm %02ds", d, h, m, s)
+                 
+                 //when the timer ends, it kinda just stays at the 00days, 00hours, 00minutes, 00seconds screen.
+                 //so basically figure out how to properly add in the alert notification that the time is up and a way so that when the button is clicked, the program acknowledges that the user knows the time is up and then reverts back to the original page where you can set up another countdown timer
              }
+    func toggleMenu() {
+        menuOpened.toggle()
+    }
          }
 
 
+//how to add in navigation bar to the homepage so that the user can actually go to all the different slides that are going to be on the app.
+//i tried the .toolbar thing, but it keeps saying that the toolbar thing can't be used in the view scope and i'm not sure why when it literally works in the about me and the navigation app thing we worked on together as a class.
+//i also tried the other navigation bar thing that i out in the google doc (day 7), but it just looks unaesthetic, so i'm going to leave it as a last resort, also idk if the button thing on that work. (cause i have to remember that it has to be a navigation bar, not a bunch of displays)
+        
 #Preview {
     ContentView()
 }
