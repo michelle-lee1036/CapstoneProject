@@ -3,7 +3,7 @@
 //  CapstoneProject
 //
 //  Created by Scholar on 7/28/25.
-//
+// add all the other color, background, dividers, frames, and stuff later. just added a few for now to see how much space left there will be.
 
 import SwiftUI
 
@@ -20,6 +20,21 @@ struct ContentView: View {
     @State private var countdownStarted = false
     
     var body: some View {
+        //maybe add back the v stack
+        Text("HEALTHMILES")
+            .font(.largeTitle)
+            .foregroundColor(Color(red: 0.416, green: 0.043, blue: 0.763))
+        //above is the color of the text
+            .frame(width:300, height:90)
+            .border(Color.red, width: 5)
+        //above is the color of the frame
+        
+        Divider()
+            .frame(height: 3)
+            .overlay(.black)
+            .padding()
+        Text("Home 🏡")
+        
         VStack(spacing: 20) {
             if !countdownStarted {
                 VStack {
@@ -36,50 +51,50 @@ struct ContentView: View {
                         Stepper("Seconds: \(inputSeconds)", value: $inputSeconds, in: 0...59)
                     }
                 }
-
-            Button("Start Countdown") {
-                             let totalSeconds = inputDays * 86400 + inputHours * 3600 + inputMinutes * 60 + inputSeconds
-                             timeRemaining = totalSeconds
-                             targetDate = Date().addingTimeInterval(Double(totalSeconds))
-                             isPaused = false
-                             countdownStarted = true
-                         }
-                     } else {
-                         // Countdown display
-                         Text("Time remaining: \(formatTime(seconds: timeRemaining))")
-                             .onReceive(timer) { _ in
-                                 if !isPaused && timeRemaining > 0 {
-                                     timeRemaining -= 1
-                                 }
-                                 if timeRemaining <= 0 {
-                                     isPaused = true
-                                 }
-                             }
-
-                         HStack {
-                             Button("Pause") {
-                                 isPaused = true
-                             }
-
-                             Button("Resume") {
-                                 isPaused = false
-                             }
-
-                             Button("Reset") {
-                                 isPaused = true
-                                 countdownStarted = false
-                                 inputDays = 0
-                                 inputHours = 0
-                                 inputMinutes = 0
-                                 inputSeconds = 0
-                                 timeRemaining = 0
-                             }
-                         }
-                     }
-                 }
-                 .font(.title2)
-                 .padding()
-             }
+                
+                Button("Start Countdown") {
+                    let totalSeconds = inputDays * 86400 + inputHours * 3600 + inputMinutes * 60 + inputSeconds
+                    timeRemaining = totalSeconds
+                    targetDate = Date().addingTimeInterval(Double(totalSeconds))
+                    isPaused = false
+                    countdownStarted = true
+                }
+            } else {
+                // Countdown display
+                Text("Time remaining: \(formatTime(seconds: timeRemaining))")
+                    .onReceive(timer) { _ in
+                        if !isPaused && timeRemaining > 0 {
+                            timeRemaining -= 1
+                        }
+                        if timeRemaining <= 0 {
+                            isPaused = true
+                        }
+                    }
+                
+                HStack {
+                    Button("Pause") {
+                        isPaused = true
+                    }
+                    
+                    Button("Resume") {
+                        isPaused = false
+                    }
+                    
+                    Button("Reset") {
+                        isPaused = true
+                        countdownStarted = false
+                        inputDays = 0
+                        inputHours = 0
+                        inputMinutes = 0
+                        inputSeconds = 0
+                        timeRemaining = 0
+                    }
+                }
+            }
+        }
+        .padding()
+        
+    }
 
              func formatTime(seconds: Int) -> String {
                  let d = seconds / 86400
