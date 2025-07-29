@@ -1,3 +1,8 @@
+// NewItineraryView.swift
+// CapstoneProject
+//
+// Created by Scholar on 7/28/25.
+//
 import SwiftUI
 import SwiftData
 struct NewItineraryView: View {
@@ -31,3 +36,4 @@ struct NewItineraryView: View {
     showNewTask: .constant(false)
   )
 }
+

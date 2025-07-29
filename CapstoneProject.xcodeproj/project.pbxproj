@@ -6,12 +6,7 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		BD3915C32E390A8800ACDD70 /* NewItineraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3915C22E390A8800ACDD70 /* NewItineraryView.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		BD3915C22E390A8800ACDD70 /* NewItineraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItineraryView.swift; sourceTree = "<group>"; };
 		BD5B7C502E37E89700E4A416 /* CapstoneProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -37,7 +32,6 @@
 		BD5B7C472E37E89700E4A416 = {
 			isa = PBXGroup;
 			children = (
-				BD3915C22E390A8800ACDD70 /* NewItineraryView.swift */,
 				BD5B7C522E37E89700E4A416 /* CapstoneProject */,
 				BD5B7C512E37E89700E4A416 /* Products */,
 			);
@@ -125,7 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD3915C32E390A8800ACDD70 /* NewItineraryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
