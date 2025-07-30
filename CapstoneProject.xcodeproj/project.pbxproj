@@ -6,17 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		BDC808EE2E3A5E2F0038A663 /* PackingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC808ED2E3A5E2F0038A663 /* PackingList.swift */; };
-		BDC808F02E3A5EBD0038A663 /* NewPackingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC808EF2E3A5EBD0038A663 /* NewPackingListView.swift */; };
-		BDC808F22E3A5EE90038A663 /* ItemNeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC808F12E3A5EE90038A663 /* ItemNeeded.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		BD5B7C502E37E89700E4A416 /* CapstoneProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDC808ED2E3A5E2F0038A663 /* PackingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingList.swift; sourceTree = "<group>"; };
-		BDC808EF2E3A5EBD0038A663 /* NewPackingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPackingListView.swift; sourceTree = "<group>"; };
-		BDC808F12E3A5EE90038A663 /* ItemNeeded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNeeded.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -41,9 +32,6 @@
 		BD5B7C472E37E89700E4A416 = {
 			isa = PBXGroup;
 			children = (
-				BDC808ED2E3A5E2F0038A663 /* PackingList.swift */,
-				BDC808EF2E3A5EBD0038A663 /* NewPackingListView.swift */,
-				BDC808F12E3A5EE90038A663 /* ItemNeeded.swift */,
 				BD5B7C522E37E89700E4A416 /* CapstoneProject */,
 				BD5B7C512E37E89700E4A416 /* Products */,
 			);
@@ -131,9 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDC808F22E3A5EE90038A663 /* ItemNeeded.swift in Sources */,
-				BDC808F02E3A5EBD0038A663 /* NewPackingListView.swift in Sources */,
-				BDC808EE2E3A5E2F0038A663 /* PackingList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
