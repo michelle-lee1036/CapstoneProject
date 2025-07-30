@@ -23,6 +23,7 @@ let locationDict: [String: CLLocationCoordinate2D ] = [
 ]
 
 struct MapSlide: View {
+    
     //Variables
     @State private var position = MapCameraPosition.region(MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 38.91, longitude: -77.04), span: MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)
@@ -39,6 +40,8 @@ struct MapSlide: View {
     @State private var showField1 = true
     
     var body: some View {
+    
+        
         Map (position: $position){
             //Perm DC Marker
             Marker("Washington DC", coordinate: locationDict["Washington DC"]!)

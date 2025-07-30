@@ -22,7 +22,7 @@ struct MenuContent: View {
         MenuItem(text: "Itinerary", imageName: "calendar"),
         MenuItem(text: "Map", imageName: "map"),
         MenuItem(text: "Health", imageName: "cross"),
-        MenuItem(text: "something1", imageName: "person.circle"),
+        MenuItem(text: "Account", imageName: "person.circle"),
         MenuItem(text: "Share", imageName: "square.and.arrow.up")
         //the last two button things can be deleted, I just added them to make the navigation bar thing work
     ]
@@ -108,11 +108,13 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
+       
         NavigationStack {
             ZStack {
                 VStack(spacing: 20) {
                     Text("HEALTHMILES")
                         .font(.largeTitle)
+                        .bold()
                         .foregroundColor(Color(red: 0.416, green: 0.043, blue: 0.763))
                         .frame(width: 300, height: 90)
                         .border(Color.red, width: 5)
@@ -185,7 +187,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Home")
-            .alert("Trip started!", isPresented: $showAlert) {
+            .alert("Trip has started!!!", isPresented: $showAlert) {
                 Button("OK") {
                     resetCountdown()
                 }
