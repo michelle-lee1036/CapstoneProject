@@ -11,6 +11,9 @@ struct ContentView: View {
     @State private var showMenu = false
     @State private var selectedTab = 0
     
+    @State private var newToDoItem = ItemNeeded(title: "", isImportant: false)
+    @State private var showNewTask = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -18,23 +21,26 @@ struct ContentView: View {
                     HomePage()
                         .tag(0)
                     
-                    Itinerary(dest1: "Paris", dest2: "New York")
-                        .tag(1)
-
                     MapSlide()
+                        .tag(1)
+                    
+                    Itinerary(dest1: "Paris", dest2: "New York")
                         .tag(2)
                     
                     Text("Health")
                         .tag(3)
                     
-                    Text("Notifications")
+                    PackingList()
                         .tag(4)
+                    
+                    Text("Notifications")
+                        .tag(5)
                 }
                 
                 SideMenuView(isShowing: $showMenu, selectedTab: $selectedTab)
             }
             .toolbar(showMenu ? .hidden: .visible, for: .navigationBar)
-                .navigationTitle("NavigationTitle(change later)")
+                .navigationTitle("HealthMiles")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -52,8 +58,6 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-
-        
         
         //how to add in navigation bar to the homepage so that the user can actually go to all the different slides that are going to be on the app. (NEED BUTTONS, but HOW)
         //figured out the navigation bar thing

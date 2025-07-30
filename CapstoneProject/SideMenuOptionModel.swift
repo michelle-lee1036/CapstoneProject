@@ -9,21 +9,24 @@ import Foundation
 
 enum SideMenuOptionModel: Int, CaseIterable {
     case home
-    case itinerary
     case map
+    case itinerary
     case health
+    case packinglist
     case notifications
     
     var title: String {
         switch self {
         case .home:
             return "Home"
-        case .itinerary:
-            return "Itinerary"
         case .map:
             return "Map"
+        case .itinerary:
+            return "Itinerary"
         case .health:
             return "Health"
+        case .packinglist:
+            return"Packing List"
         case .notifications:
             return "Notifications"
         }
@@ -34,12 +37,14 @@ enum SideMenuOptionModel: Int, CaseIterable {
         switch self {
         case .home:
             return"house"
-        case .itinerary:
-            return "calendar"
         case .map:
             return "map"
+        case .itinerary:
+            return "calendar"
         case .health:
         return "cross"
+        case .packinglist:
+            return "backpack"
         case .notifications:
             return "bell"
         }
