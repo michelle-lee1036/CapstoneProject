@@ -16,10 +16,19 @@ struct TripPage: View {
     
     var tripName = "Your trip ✈️"
     var body: some View {
-        Text("\(tripName)")
-            .font(.title)
-            .font(.system(size: 50))
-            .fontWeight(.heavy)
+        VStack {
+            Text("\(tripName)")
+                .font(.title)
+                .font(.system(size: 50))
+                .fontWeight(.heavy)
+            
+            //Display dates
+            
+            
+            //Destination boxes
+            DestinationCard(destination: dest1)
+            DestinationCard(destination: dest2)
+        }
     }
 }
 
@@ -32,6 +41,9 @@ struct DestinationCard: View {
             Image(destinationImageName(for: destination))
                 .resizable()
             Text("Tap to learn more!")
+        }
+        .onTapGesture {
+            
         }
     }
     
@@ -50,5 +62,5 @@ struct DestinationCard: View {
 }
 
 #Preview {
-    TripPage()
+    TripPage(dest1: "paris",dest2: "newyork", dates1: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!], dates2: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!])
 }
