@@ -17,6 +17,7 @@ struct Itinerary: View {
     @State private var selectedDatesDest2: Set<DateComponents> = []
     @State private var showNextButton = false
     @State private var whichDest = 1
+    @State private var goToTripPage = false
     var body: some View {
         if whichDest == 1 {
             VStack {
@@ -89,14 +90,18 @@ struct Itinerary: View {
                     selectedDatesDest2 = []
                 }
                 if showNextButton == true {
-                    Button("Next"){
-                        
+                    Button("Confirm"){
+//                       confirmationScreen()
+                        goToTripPage = true
                     }
                     .disabled(!overlappingDates.isEmpty)
                 }
             }
         }
+        
+        NavigationLink(destination: TripPage(dest1:dest1, dest2:dest2, dates1: sortedDatesDest1, dates2: sortedDatesDest2), isActive: $goToTripPage)
     }
+    
     
     var sortedDatesDest1: [Date] {
         selectedDatesDest1.compactMap { calendar.date(from: $0) }.sorted()
@@ -150,6 +155,12 @@ struct Itinerary: View {
             return nil
         }; return calendar.dateComponents([.day], from: start, to: end).day.map {$0 + 1}
     }
+    
+//    func confirmationScreen() -> String {
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .long
+//        return ("Your trip in \(dest1) is from \(formatter.string(from: sortedDatesDest1.first!)) to \(formatter.string(from: sortedDatesDest1.last!)). Your trip in \(dest2) is from \(formatter.string(from:sortedDatesDest2.first!)) to \(formatter.string(from:sortedDatesDest2.last!))")
+//    }
 }
 
 #Preview {
