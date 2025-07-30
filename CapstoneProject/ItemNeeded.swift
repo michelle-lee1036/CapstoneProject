@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 //
 //  ItemNeeded 2.swift
 //  CapstoneProject

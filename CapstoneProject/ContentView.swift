@@ -224,61 +224,11 @@ struct ContentView: View {
     
     func toggleMenu() {
         menuOpened.toggle()
-=======
-        VStack {
-            HStack {
-                Text("Packing List:")
-                    .font(.system(size: 40))
-                    .fontWeight(.black)
-                Spacer()
-                Button {
-                    withAnimation {
-                        showNewItem = true
-                    }
-                } label: {
-                    Text("+")
-                        .font(.title)
-                        .fontWeight(.bold)
-                }
-            }
-            .padding()
-
-            Spacer()
-
-            List {
-                ForEach(toDos) { toDoItem in
-                    if toDoItem.isImportant {
-                        Text("‼️ " + toDoItem.title)
-                            .fontWeight(.bold)
-                    } else {
-                        Text(toDoItem.title)
-                    }
-                }
-                .onDelete(perform: deleteToDo)
-            }
-            .listStyle(.plain)
-
-            if showNewItem {
-                NewItineraryView(
-                    toDoItem: ItemNeeded(title: "", isImportant: false),
-                    showNewTask: $showNewItem
-                )
-            }
-        }
-
-    }
-
-
-    func deleteToDo(at offsets: IndexSet) {
-        for offset in offsets {
-            let toDoItem = toDos[offset]
-            modelContext.delete(toDoItem)
+    
         }
     }
 }
 
->>>>>>> rania-dev
 #Preview {
     ContentView()
-        .modelContainer(for: ItemNeeded.self, inMemory: true)
 }
