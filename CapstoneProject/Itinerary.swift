@@ -17,86 +17,97 @@ struct Itinerary: View {
     @State private var selectedDatesDest2: Set<DateComponents> = []
     @State private var showNextButton = false
     @State private var whichDest = 1
+    @State private var goToTripPage = false
     var body: some View {
-        if whichDest == 1 {
-            VStack {
-                Text("\(dest1)")
-                    .foregroundColor(Color.blue)
-                    .frame(alignment: .leading)
-                    .font(.system(size:40))
-                    .fontWeight(.ultraLight)
-                Text("Itinerary")
-                    .frame(alignment: .leading)
-                    .font(.system(size:50))
-                    .fontWeight(.heavy)
-                summary1
-                if let days = tripLength1 {
-                    if days > 1 {
-                        Text("You will spend \(days) days in \(dest1)")
-                    }
-                }
-                MultiDatePicker("Select a Date", selection: $selectedDatesDest1, in: Date.now...)
-                    .frame(height: 400)
-                    .onChange(of: selectedDatesDest1) {
-                        if sortedDatesDest1.count == 2 {
-                            showNextButton = true
-                        } else {
-                            showNextButton = false
+        NavigationStack{
+            Group {
+                if whichDest == 1 {
+                    VStack {
+                        Text("\(dest1)")
+                            .foregroundColor(Color.blue)
+                            .frame(alignment: .leading)
+                            .font(.system(size:40))
+                            .fontWeight(.ultraLight)
+                        Text("Itinerary")
+                            .frame(alignment: .leading)
+                            .font(.system(size:50))
+                            .fontWeight(.heavy)
+                        summary1
+                        if let days = tripLength1 {
+                            if days > 1 {
+                                Text("You will spend \(days) days in \(dest1)")
+                            }
+                        }
+                        MultiDatePicker("Select a Date", selection: $selectedDatesDest1, in: Date.now...)
+                            .frame(height: 400)
+                            .onChange(of: selectedDatesDest1) {
+                                if sortedDatesDest1.count == 2 {
+                                    showNextButton = true
+                                } else {
+                                    showNextButton = false
+                                }
+                            }
+                        Button("Clear Dates") {
+                            selectedDatesDest1 = []
+                        }
+                        if showNextButton == true {
+                            Button("Next"){
+                                whichDest = 2
+                                showNextButton = false
+                            }
                         }
                     }
-                Button("Clear Dates") {
-                    selectedDatesDest1 = []
-                }
-                if showNextButton == true {
-                    Button("Next"){
-                        whichDest = 2
+                } else if whichDest == 2 {
+                    VStack {
+                        Text("\(dest2)")
+                            .foregroundColor(Color.pink)
+                            .frame(alignment: .leading)
+                            .font(.system(size:40))
+                            .fontWeight(.ultraLight)
+                        Text("Itinerary")
+                            .frame(alignment: .leading)
+                            .font(.system(size:40))
+                            .fontWeight(.heavy)
+                        summary2
+                        if let days = tripLength2 {
+                            if days > 1 {
+                                Text("You will spend \(days) days in \(dest2)")
+                            }
+                        }
+                        MultiDatePicker("Select a Date", selection: $selectedDatesDest2, in: Date.now...)
+                            .frame(height: 400)
+                            .onChange(of: selectedDatesDest2) {
+                                if sortedDatesDest2.count == 2 {
+                                    showNextButton = true
+                                } else {
+                                    showNextButton = false
+                                }
+                            }
+                        if !overlappingDates.isEmpty {
+                            Text("Your selected dates for \(dest2) overlap with your time in \(dest1) ⚠️")
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.red)
+                                .padding(.horizontal)
+                        }
+                        Button("Clear Dates") {
+                            selectedDatesDest2 = []
+                        }
+                        if showNextButton == true {
+                            Button("Confirm"){
+                                //                       confirmationScreen()
+                                goToTripPage = true
+                            }
+                            .disabled(!overlappingDates.isEmpty)
+                        }
                     }
                 }
             }
-        } else if whichDest == 2 {
-            VStack {
-                Text("\(dest2)")
-                    .foregroundColor(Color.pink)
-                    .frame(alignment: .leading)
-                    .font(.system(size:40))
-                    .fontWeight(.ultraLight)
-                Text("Itinerary")
-                    .frame(alignment: .leading)
-                    .font(.system(size:40))
-                    .fontWeight(.heavy)
-                summary2
-                if let days = tripLength2 {
-                    if days > 1 {
-                        Text("You will spend \(days) days in \(dest2)")
-                    }
-                }
-                MultiDatePicker("Select a Date", selection: $selectedDatesDest2, in: Date.now...)
-                    .frame(height: 400)
-                    .onChange(of: selectedDatesDest2) {
-                        if sortedDatesDest2.count == 2 {
-                            showNextButton = true
-                        } else {
-                            showNextButton = false
-                        }
-                    }
-                if !overlappingDates.isEmpty {
-                    Text("Your selected dates for \(dest2) overlap with your time in \(dest1) ⚠️")
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.red)
-                        .padding(.horizontal)
-                }
-                Button("Clear Dates") {
-                    selectedDatesDest2 = []
-                }
-                if showNextButton == true {
-                    Button("Next"){
-                        
-                    }
-                    .disabled(!overlappingDates.isEmpty)
-                }
+            .navigationDestination(isPresented: $goToTripPage) {
+                TripPage(dest1: dest1, dest2: dest2, dates1: sortedDatesDest1, dates2: sortedDatesDest2)
             }
         }
     }
+    
     
     var sortedDatesDest1: [Date] {
         selectedDatesDest1.compactMap { calendar.date(from: $0) }.sorted()
@@ -150,6 +161,12 @@ struct Itinerary: View {
             return nil
         }; return calendar.dateComponents([.day], from: start, to: end).day.map {$0 + 1}
     }
+    
+//    func confirmationScreen() -> String {
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .long
+//        return ("Your trip in \(dest1) is from \(formatter.string(from: sortedDatesDest1.first!)) to \(formatter.string(from: sortedDatesDest1.last!)). Your trip in \(dest2) is from \(formatter.string(from:sortedDatesDest2.first!)) to \(formatter.string(from:sortedDatesDest2.last!))")
+//    }
 }
 
 #Preview {
