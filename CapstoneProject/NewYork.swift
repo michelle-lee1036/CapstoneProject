@@ -1,5 +1,5 @@
 //
-//  HealthInfo.swift
+//  NewYork.swift
 //  CapstoneProject
 //
 //  Created by Scholar on 7/29/25.8
@@ -7,43 +7,45 @@
 
 import SwiftUI
 
-struct HealthInfo: View {
+struct NewYork: View {
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            Image("paris")
+            Image("newyork")
                 .renderingMode(.none)
                 .resizable(capInsets: EdgeInsets())
                 .aspectRatio(contentMode: .fit)
-            Text("Paris!")
+
+            Text("New York!")
                 .font(.title)
                 .fontWeight(.bold)
-            Text(" ")
+            Text("  ")
 
             Text("Common Illnesses:")
                 .font(.title3)
                 .fontWeight(.bold)
 
-            Text("- Respiratory infections: Common cold, Flu, Bronchitis")
-            Text("- Gastrointestinal illnesses: Traveler’s Diarrhea")
+            Text("- Legionnaires disease, transmitted through inhaling contaminated water vapor")
             Text(" ")
-
+            
             Text("Air Quality:")
                 .font(.title3)
                 .fontWeight(.bold)
 
-            Text("- Occasional problems with air quality")
+            Text("- Wildfire smoke")
+            Text("- Pollution")
+            Text("- High ozone days (often in July-August)")
             Text(" ")
             Text("Other things to note:")
                 .font(.title3)
                 .fontWeight(.bold)
 
-            Text("- Pickpocketing")
-            Text("- Bedbugs and measles")
-            Text("- Terrorist groups threatening the city")
+            Text("- Petty theft")
+            Text("- Scams targeting tourists")
+            Text("- Drug use in public spaces")
         }
-        }
+            }
 }
 
 #Preview {
-    HealthInfo()
+    NewYork()
 }
