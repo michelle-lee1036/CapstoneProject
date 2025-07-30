@@ -34,7 +34,7 @@ struct ContentView: View {
                 SideMenuView(isShowing: $showMenu, selectedTab: $selectedTab)
             }
             .toolbar(showMenu ? .hidden: .visible, for: .navigationBar)
-                .navigationTitle("something")
+                .navigationTitle("NavigationTitle(change later)")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
