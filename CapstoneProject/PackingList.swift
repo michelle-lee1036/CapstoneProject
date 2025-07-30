@@ -7,7 +7,7 @@ struct PackingList: View {
   var body: some View {
       VStack {
       HStack {
-        Text("🌴 Hello Packing List:")
+        Text("🌴 Packing List:")
           .font(.system(size: 40))
           .fontWeight(.black)
         Spacer()
