@@ -15,32 +15,71 @@ struct Itinerary: View {
     @Environment(\.calendar) var calendar
     @State private var selectedDates: Set<DateComponents> = []
     @State private var showNextButton = false
+    @State private var whichDest = 1
     var body: some View {
-        VStack {
-            Text("Itinerary")
-                .frame(alignment: .leading)
-                .font(.system(size:40))
-                .fontWeight(.heavy)
-            summary
-            if let days = tripLength {
-                if days > 1 {
-                    Text("You will spend \(days) days in \(dest1)")
-                }
-            }
-            MultiDatePicker("Select a Date", selection: $selectedDates, in: Date.now...)
-                .frame(height: 400)
-                .onChange(of: selectedDates) {
-                    if sortedDates.count == 2 {
-                        showNextButton = true
-                    } else {
-                        showNextButton = false
+        if whichDest == 1 {
+            VStack {
+                Text("\(dest1)")
+                    .foregroundColor(Color.blue)
+                    .frame(alignment: .leading)
+                    .font(.system(size:40))
+                    .fontWeight(.ultraLight)
+                Text("Itinerary")
+                    .frame(alignment: .leading)
+                    .font(.system(size:50))
+                    .fontWeight(.heavy)
+                summary
+                if let days = tripLength {
+                    if days > 1 {
+                        Text("You will spend \(days) days in \(dest1)")
                     }
                 }
-            Button("Clear Dates") {
-                selectedDates = []
+                MultiDatePicker("Select a Date", selection: $selectedDates, in: Date.now...)
+                    .frame(height: 400)
+                    .onChange(of: selectedDates) {
+                        if sortedDates.count == 2 {
+                            showNextButton = true
+                        } else {
+                            showNextButton = false
+                        }
+                    }
+                Button("Clear Dates") {
+                    selectedDates = []
+                }
+                if showNextButton == true {
+                    Button("Next"){
+                        whichDest = 2
+                    }
+                }
             }
-            if showNextButton == true {
-                Button("Next"){
+        } else if whichDest == 2 {
+            VStack {
+                Text("Itinerary")
+                    .frame(alignment: .leading)
+                    .font(.system(size:40))
+                    .fontWeight(.heavy)
+                summary
+                if let days = tripLength {
+                    if days > 1 {
+                        Text("You will spend \(days) days in \(dest2)")
+                    }
+                }
+                MultiDatePicker("Select a Date", selection: $selectedDates, in: Date.now...)
+                    .frame(height: 400)
+                    .onChange(of: selectedDates) {
+                        if sortedDates.count == 2 {
+                            showNextButton = true
+                        } else {
+                            showNextButton = false
+                        }
+                    }
+                Button("Clear Dates") {
+                    selectedDates = []
+                }
+                if showNextButton == true {
+                    Button("Next"){
+                        whichDest = 2
+                    }
                 }
             }
         }
