@@ -11,7 +11,7 @@
 //
 // Created by Scholar on 7/28/25.
 //
->>>>>>> rania-dev
+
 import Foundation
 import SwiftData
 @Model

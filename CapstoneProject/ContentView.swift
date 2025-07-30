@@ -8,11 +8,6 @@ struct MenuItem: Identifiable {
     let imageName: String
     let handler: () -> Void
 }
-
-struct ContentView: View {
-    @State private var showNewItem = false
-    @Query var toDos: [ItemNeeded]
-    @Environment(\.modelContext) var modelContext
     
 struct MenuContent: View {
     let items: [MenuItem] = [
@@ -227,7 +222,7 @@ struct ContentView: View {
     
         }
     }
-}
+
 
 #Preview {
     ContentView()
