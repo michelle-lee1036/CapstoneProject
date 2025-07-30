@@ -5,9 +5,9 @@ struct PackingList: View {
   @Query var toDos: [ItemNeeded]
   @Environment(\.modelContext) var modelContext
   var body: some View {
-    VStack {
+      VStack {
       HStack {
-        Text("Packing List:")
+        Text("🌴 Hello Packing List:")
           .font(.system(size: 40))
           .fontWeight(.black)
         Spacer()
@@ -19,10 +19,16 @@ struct PackingList: View {
           Text("+")
             .font(.title)
             .fontWeight(.bold)
+            .foregroundColor(.orange)
+            .padding(8)
+            .background(Color.white)
+            .clipShape(Circle())
+            
         }
       }
       .padding()
       Spacer()
+
       List {
         ForEach(toDos) { toDoItem in
           if toDoItem.isImportant {
@@ -31,6 +37,7 @@ struct PackingList: View {
           } else {
             Text(toDoItem.title)
           }
+            Spacer()
         }
         .onDelete(perform: deleteToDo)
       }
