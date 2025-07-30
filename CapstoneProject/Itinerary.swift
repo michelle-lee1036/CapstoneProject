@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct Itinerary: View {
+    
     let dest1: String
+    let dest2: String
+    
     @Environment(\.calendar) var calendar
     @State private var selectedDates: Set<DateComponents> = []
     var body: some View {
@@ -25,6 +28,9 @@ struct Itinerary: View {
             }
             MultiDatePicker("Select a Date", selection: $selectedDates, in: Date.now...)
                 .frame(height: 400)
+            Button("Next"){
+                
+            }
         }
     }
     var sortedDates: [Date] {
@@ -47,5 +53,5 @@ struct Itinerary: View {
 }
 
 #Preview {
-    Itinerary(dest1: "Paris")
+    Itinerary(dest1: "Paris",dest2:"New York")
 }
