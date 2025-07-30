@@ -65,6 +65,12 @@ struct DestinationCard: View {
                 .foregroundColor(.blue)
             
         }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(red: 0.84, green: 0.92, blue: 0.98))
+                .shadow(color: .gray.opacity(0.6), radius: 5, x: 1, y: 1)
+        )
         .onTapGesture {
             
         }
