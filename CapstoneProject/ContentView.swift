@@ -1,30 +1,32 @@
-//
-//  ContentView.swift
-//  CapstoneProject
-//
-//  Created by Scholar on 7/28/25.
-// add all the other color, background, dividers, frames, and stuff later. just added a few for now to see how much space left there will be.
-
 import SwiftUI
 
 struct MenuItem: Identifiable {
     var id = UUID()
     let text: String
     let imageName: String
-    let handler: () -> Void = {
-        print("Tapped Item")
-    }
+    let handler: () -> Void
 }
 
 struct MenuContent: View {
     let items: [MenuItem] = [
-        MenuItem(text: "Home", imageName: "house"),
-        MenuItem(text: "Itinerary", imageName: "calendar"),
-        MenuItem(text: "Map", imageName: "map"),
-        MenuItem(text: "Health", imageName: "cross"),
-        MenuItem(text: "Account", imageName: "person.circle"),
-        MenuItem(text: "Share", imageName: "square.and.arrow.up")
-        //the last two button things can be deleted, I just added them to make the navigation bar thing work
+        MenuItem(text: "Home", imageName: "house", handler: {
+            print("Tapped Home")
+        }),
+        MenuItem(text: "Itinerary", imageName: "calendar", handler: {
+            print("Tapped Itinerary")
+        }),
+        MenuItem(text: "Map", imageName: "map", handler: {
+            print("Tapped Map")
+        }),
+        MenuItem(text: "Health", imageName: "cross", handler: {
+            print("Tapped Health")
+        }),
+        MenuItem(text: "Account", imageName: "person.circle", handler: {
+            print("Tapped Account")
+        }),
+        MenuItem(text: "Share", imageName: "square.and.arrow.up", handler: {
+            print("Tapped Share")
+        })
     ]
     
     var body: some View {
@@ -108,11 +110,10 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-       
         NavigationStack {
             ZStack {
                 VStack(spacing: 20) {
-                    Text("HEALTHMILES")
+                    Text("HealthMiles")
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(Color(red: 0.416, green: 0.043, blue: 0.763))
@@ -221,11 +222,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-
-
-//how to add in navigation bar to the homepage so that the user can actually go to all the different slides that are going to be on the app. (NEED BUTTONS, but HOW)
-//figured out the navigation bar thing
-//need to figure out how to make the countdown clock less work for user
-//we need to do the calculation, not them adding in all the hours, minutes, and seconds, and stuff
-
-//at the very end make everything look aesthetic with the nice colors
