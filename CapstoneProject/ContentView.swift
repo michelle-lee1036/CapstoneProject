@@ -18,7 +18,7 @@ struct ContentView: View {
                     HomePage()
                         .tag(0)
                     
-                    Text("Itinerary")
+                    Itinerary(dest1: "Paris", dest2: "New York")
                         .tag(1)
 
                     MapSlide()
