@@ -1,32 +1,38 @@
-//
-//  ContentView.swift
-//  CapstoneProject
-//
-//  Created by Scholar on 7/28/25.
-// add all the other color, background, dividers, frames, and stuff later. just added a few for now to see how much space left there will be.
-
 import SwiftUI
+import SwiftData
+
 
 struct MenuItem: Identifiable {
     var id = UUID()
     let text: String
     let imageName: String
-    let handler: () -> Void = {
-        print("Tapped Item")
-    }
+    let handler: () -> Void
 }
-
+    
 struct MenuContent: View {
     let items: [MenuItem] = [
-        MenuItem(text: "Home", imageName: "house"),
-        MenuItem(text: "Itinerary", imageName: "calendar"),
-        MenuItem(text: "Map", imageName: "map"),
-        MenuItem(text: "Health", imageName: "cross"),
-        MenuItem(text: "something1", imageName: "person.circle"),
-        MenuItem(text: "Share", imageName: "square.and.arrow.up")
+        MenuItem(text: "Home", imageName: "house", handler: {
+            print("Tapped Home")
+        }),
+        MenuItem(text: "Itinerary", imageName: "calendar", handler: {
+            print("Tapped Itinerary")
+        }),
+        MenuItem(text: "Map", imageName: "map", handler: {
+            print("Tapped Map")
+        }),
+        MenuItem(text: "Health", imageName: "cross", handler: {
+            print("Tapped Health")
+        }),
+        MenuItem(text: "Account", imageName: "person.circle", handler: {
+            print("Tapped Account")
+        }),
+        MenuItem(text: "Share", imageName: "square.and.arrow.up", handler: {
+            print("Tapped Share")
+        })
     ]
     
     var body: some View {
+
         ZStack {
             Color(UIColor(red: 43/255.0, green: 40/255.0, blue: 74/255.0, alpha: 1))
                 .ignoresSafeArea()
@@ -110,8 +116,9 @@ struct ContentView: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 20) {
-                    Text("HEALTHMILES")
+                    Text("HealthMiles")
                         .font(.largeTitle)
+                        .bold()
                         .foregroundColor(Color(red: 0.416, green: 0.043, blue: 0.763))
                         .frame(width: 300, height: 90)
                         .border(Color.red, width: 5)
@@ -121,7 +128,8 @@ struct ContentView: View {
                         .overlay(.black)
                         .padding(.bottom)
                     
-                    Text("Home 🏡")
+                    Text("Countdown Clock ⏰")
+                        .bold()
                     
                     if !countdownStarted {
                         VStack {
@@ -183,7 +191,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Home")
-            .alert("Trip started!", isPresented: $showAlert) {
+            .alert("Trip has started!!!", isPresented: $showAlert) {
                 Button("OK") {
                     resetCountdown()
                 }
@@ -211,15 +219,11 @@ struct ContentView: View {
     
     func toggleMenu() {
         menuOpened.toggle()
+    
+        }
     }
-}
+
 
 #Preview {
     ContentView()
 }
-
-
-//how to add in navigation bar to the homepage so that the user can actually go to all the different slides that are going to be on the app.
-//i tried the .toolbar thing, but it keeps saying that the toolbar thing can't be used in the view scope and i'm not sure why when it literally works in the about me and the navigation app thing we worked on together as a class.
-//i also tried the other navigation bar thing that i out in the google doc (day 7), but it just looks unaesthetic, so i'm going to leave it as a last resort, also idk if the button thing on that work. (cause i have to remember that it has to be a navigation bar, not a bunch of displays)
- 
