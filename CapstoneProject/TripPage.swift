@@ -30,7 +30,7 @@ struct TripPage: View {
             if let d1 = dates2.first, let d2 = dates2.last {
                 Text("Dates in \(dest2): \(formatted(d1)) - \(formatted(d2))")
             }
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 80)
             
             //Destination boxes
             DestinationCard(destination: dest1)
@@ -53,11 +53,14 @@ struct DestinationCard: View {
     var body: some View {
         VStack {
             Text(destination.capitalized)
+                .fontWeight(.bold)
             Image(destinationImageName(for: destination))
                 .resizable()
                 .scaledToFill()
                 .frame(height:200)
+                .frame(width:350)
                 .clipped()
+                .cornerRadius(10)
             Text("Tap to learn more!")
                 .foregroundColor(.blue)
             
@@ -82,5 +85,5 @@ struct DestinationCard: View {
 }
 
 #Preview {
-    TripPage(dest1: "paris",dest2: "new york", dates1: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!], dates2: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!])
+    TripPage(dest1: "Paris",dest2: "new york", dates1: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!], dates2: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!])
 }
