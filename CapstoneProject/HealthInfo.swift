@@ -12,6 +12,10 @@ struct HealthInfo: View {
         Text("Paris")
             .font(.title)
             .fontWeight(.bold)
+            .padding(.bottom, 350.0)
+            
+        Text("Paris, the capital of France is one of Europes most popular cities. Known for its iconic landmarks, world-class art and fashion, vibrant cafe culture, and romantic atmosphere. A popular and great place to travel")
+            
         Text("Common Illness")
             .font(.title3)
         Text("Respiratory infections: Common cold, Flu, Bronchitis")
