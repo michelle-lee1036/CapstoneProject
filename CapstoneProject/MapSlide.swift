@@ -39,62 +39,62 @@ struct MapSlide: View {
     @State private var showField1 = true
     
     var body: some View {
-        Map (position: $position){
-            //Perm DC Marker
-            Marker("Washington DC", coordinate: locationDict["Washington DC"]!)
-            //Dest 1 marker
-            if locationDict[dest1] != nil && showLine == true {
-                Marker(dest1, coordinate: locationDict[dest1]!)
-                MapPolyline(coordinates: [ locationDict["Washington DC"]!, locationDict[dest1]!])
-                    .stroke(.red, lineWidth:3)
-            }
-            //Dest 2 marker
-            if locationDict[dest1] != nil && locationDict[dest2] != nil && showLine2 == true {
-                Marker(dest2, coordinate: locationDict[dest2]!)
-                MapPolyline(coordinates: [ locationDict[dest1]!, locationDict[dest2]!])
-                    .stroke(.red, lineWidth:3)
-            }
-            
-        }
-        VStack{
-            HStack {
-                if (showField2) {
-                    TextField("Enter Destination 2", text: $dest2)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Button("Submit") {
-                        showLine2 = true
-                        if locationDict[dest2] != nil {
-                            if let coord = locationDict[dest2] {
-                                position = MapCameraPosition.region(MKCoordinateRegion(center: coord, span: MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)))
-                            }
-                        }
-                        showField2 = false
-                    }
-                } else if showField1 {
-                    TextField("Enter Destination 1", text: $dest1)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Button("Add") {
-                        
-                        showLine = true
-                        if locationDict[dest1] != nil {
-                            if let coord = locationDict[dest1] {
-                                position = MapCameraPosition.region(MKCoordinateRegion(center: coord, span: MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)))
-                            }
-                        }
-                        showField1 = false
-                        showField2 = true
-                        
-                    }
-                } else {
-                    Button {
-                    } label: {
-                        Text("Next")
-                            .fontWeight(.bold)
-                    }
+        NavigationStack{
+            Map (position: $position){
+                //Perm DC Marker
+                Marker("Washington DC", coordinate: locationDict["Washington DC"]!)
+                //Dest 1 marker
+                if locationDict[dest1] != nil && showLine == true {
+                    Marker(dest1, coordinate: locationDict[dest1]!)
+                    MapPolyline(coordinates: [ locationDict["Washington DC"]!, locationDict[dest1]!])
+                        .stroke(.red, lineWidth:3)
+                }
+                //Dest 2 marker
+                if locationDict[dest1] != nil && locationDict[dest2] != nil && showLine2 == true {
+                    Marker(dest2, coordinate: locationDict[dest2]!)
+                    MapPolyline(coordinates: [ locationDict[dest1]!, locationDict[dest2]!])
+                        .stroke(.red, lineWidth:3)
                 }
             }
-            .padding()
-            
+            VStack{
+                HStack {
+                    if (showField2) {
+                        TextField("Enter Destination 2", text: $dest2)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Button("Submit") {
+                            showLine2 = true
+                            if locationDict[dest2] != nil {
+                                if let coord = locationDict[dest2] {
+                                    position = MapCameraPosition.region(MKCoordinateRegion(center: coord, span: MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)))
+                                }
+                            }
+                            showField2 = false
+                        }
+                    } else if showField1 {
+                        TextField("Enter Destination 1", text: $dest1)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Button("Add") {
+                            
+                            showLine = true
+                            if locationDict[dest1] != nil {
+                                if let coord = locationDict[dest1] {
+                                    position = MapCameraPosition.region(MKCoordinateRegion(center: coord, span: MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)))
+                                }
+                            }
+                            showField1 = false
+                            showField2 = true
+                            
+                        }
+                    } else {
+                        NavigationLink(destination: Itinerary(dest1:dest1,dest2:dest2)){
+                            Text("Next")
+                                .fontWeight(.bold)
+                        }
+                    }
+                }
+                .padding()
+                
+            }
         }
     }
 }
