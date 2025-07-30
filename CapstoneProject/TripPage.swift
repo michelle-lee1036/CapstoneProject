@@ -23,12 +23,27 @@ struct TripPage: View {
                 .fontWeight(.heavy)
             
             //Display dates
+            if let d1 = dates1.first, let d2 = dates1.last {
+                Text("Dates in \(dest1): \(formatted(d1)) - \(formatted(d2))")
+            }
             
+            if let d1 = dates2.first, let d2 = dates2.last {
+                Text("Dates in \(dest2): \(formatted(d1)) - \(formatted(d2))")
+            }
+            Spacer().frame(height: 40)
             
             //Destination boxes
             DestinationCard(destination: dest1)
+                Spacer().frame(height: 40)
             DestinationCard(destination: dest2)
         }
+        .padding()
+    }
+    
+    func formatted(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
     }
 }
 
@@ -36,11 +51,16 @@ struct DestinationCard: View {
     let destination: String
     
     var body: some View {
-        VStack{
-            Text(destination)
+        VStack {
+            Text(destination.capitalized)
             Image(destinationImageName(for: destination))
                 .resizable()
+                .scaledToFill()
+                .frame(height:200)
+                .clipped()
             Text("Tap to learn more!")
+                .foregroundColor(.blue)
+            
         }
         .onTapGesture {
             
@@ -62,5 +82,5 @@ struct DestinationCard: View {
 }
 
 #Preview {
-    TripPage(dest1: "paris",dest2: "newyork", dates1: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!], dates2: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!])
+    TripPage(dest1: "paris",dest2: "new york", dates1: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!], dates2: [Date(), Calendar.current.date(byAdding: .day, value: 5, to: Date())!])
 }
