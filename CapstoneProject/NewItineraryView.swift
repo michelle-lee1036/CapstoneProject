@@ -1,10 +1,3 @@
-//
-//  NewItineraryView.swift
-//  CapstoneProject
-//
-//  Created by Scholar on 7/31/25.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -16,25 +9,30 @@ struct NewItineraryView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
-                Text("Items Needed:")
-                    .font(.headline)
-                TextField("Enter the item needed...", text: $title, axis: .vertical)
-                    .textFieldStyle(.roundedBorder)
+            ZStack {
+                Color(red: 1.00, green: 0.91, blue: 0.93) // background color
+                    .ignoresSafeArea()
 
-                Toggle("Is it essential?", isOn: $isImportant)
+                VStack(spacing: 16) {
+                    Text("Items Needed:")
+                        .font(.headline)
+                    TextField("Enter the item needed...", text: $title, axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
 
-                Button("Save") {
-                    let newItem = ItemNeeded(title: title, isImportant: isImportant)
-                    modelContext.insert(newItem)
-                    showNewTask = false
+                    Toggle("Is it essential?", isOn: $isImportant)
+
+                    Button("Save") {
+                        let newItem = ItemNeeded(title: title, isImportant: isImportant)
+                        modelContext.insert(newItem)
+                        showNewTask = false
+                    }
+                    .buttonStyle(.borderedProminent)
+
+                    Spacer()
                 }
-                .buttonStyle(.borderedProminent)
-
-                Spacer()
+                .padding()
             }
-            .padding()
-            .navigationTitle("New Item")
+            .navigationTitle("🌺🍍⛱️ New Item")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -46,10 +44,7 @@ struct NewItineraryView: View {
     }
 }
 
-
-
 #Preview {
     NewItineraryView(showNewTask: .constant(true))
         .modelContainer(for: ItemNeeded.self, inMemory: true)
 }
-

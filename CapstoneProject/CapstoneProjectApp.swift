@@ -8,7 +8,7 @@ import SwiftData
 struct CapstoneProjectApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PackingList()
         }
                 .modelContainer(for: ItemNeeded.self)
     }
