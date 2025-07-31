@@ -11,7 +11,7 @@ struct CapstoneProjectApp: App {
             ContentView()
         }
                 .modelContainer(for: ItemNeeded.self)
-        }
     }
+}
 
 
