@@ -20,68 +20,71 @@ struct TripPage: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("\(tripName)")
-                    .font(.title)
-                    .font(.system(size: 50))
-                    .fontWeight(.heavy)
-                
-                //Display dates
-                if let d1 = dates1.first, let d2 = dates1.last {
-                    Text("Dates in \(dest1): \(formatted(d1)) - \(formatted(d2))")
-                }
-                
-                if let d1 = dates2.first, let d2 = dates2.last {
-                    Text("Dates in \(dest2): \(formatted(d1)) - \(formatted(d2))")
-                }
-                Spacer().frame(height: 50)
-                
+            ZStack {
+                Color(red:0.99,green:0.69,blue:0.64)
+                    .ignoresSafeArea()
                 VStack {
-                    Text(dest1.capitalized)
-                        .fontWeight(.bold)
-                    Image(destinationImageName(for: dest1))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height:200)
-                        .frame(width:350)
-                        .clipped()
-                        .cornerRadius(10)
-                    NavigationLink(destination: HealthInfo()) {
-                        Text("Tap to learn more!")
+                    Text("\(tripName)")
+                        .font(.title)
+                        .font(.system(size: 50))
+                        .fontWeight(.heavy)
+                    
+                    //Display dates
+                    if let d1 = dates1.first, let d2 = dates1.last {
+                        Text("Dates in \(dest1): \(formatted(d1)) - \(formatted(d2))")
                     }
+                    
+                    if let d1 = dates2.first, let d2 = dates2.last {
+                        Text("Dates in \(dest2): \(formatted(d1)) - \(formatted(d2))")
+                    }
+                    Spacer().frame(height: 50)
+                    
+                    VStack {
+                        Text(dest1.capitalized)
+                            .fontWeight(.bold)
+                        Image(destinationImageName(for: dest1))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height:200)
+                            .frame(width:350)
+                            .clipped()
+                            .cornerRadius(10)
+                        NavigationLink(destination: HealthInfo()) {
+                            Text("Tap to learn more!")
+                        }
+                    }
+                    .padding()
+                    .navigationBarBackButtonHidden(true)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(red:0.29,green:0.76,blue:0.655))
+                            .shadow(color: .gray.opacity(0.6), radius: 5, x: 1, y: 1)
+                    )
+                    
+                    Spacer().frame(height: 40)
+                    
+                    VStack {
+                        Text(dest2.capitalized)
+                            .fontWeight(.bold)
+                        Image(destinationImageName(for: dest2))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height:200)
+                            .frame(width:350)
+                            .clipped()
+                            .cornerRadius(10)
+                        NavigationLink(destination: Tokyo()) {
+                            Text("Tap to learn more!")
+                        }
+                    }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(red:0.29,green:0.76,blue:0.655))
+                    )
                 }
                 .padding()
-                .navigationBarBackButtonHidden(true)
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color(red: 0.84, green: 0.92, blue: 0.98))
-                        .shadow(color: .gray.opacity(0.6), radius: 5, x: 1, y: 1)
-                )
-                
-                Spacer().frame(height: 40)
-                
-                VStack {
-                    Text(dest2.capitalized)
-                        .fontWeight(.bold)
-                    Image(destinationImageName(for: dest2))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height:200)
-                        .frame(width:350)
-                        .clipped()
-                        .cornerRadius(10)
-                    NavigationLink(destination: Tokyo()) {
-                        Text("Tap to learn more!")
-                    }
-                }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color(red: 0.84, green: 0.92, blue: 0.98))
-                )
-                
             }
-            .padding()
         }
     }
     
