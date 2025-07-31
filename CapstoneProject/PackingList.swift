@@ -11,7 +11,7 @@ struct PackingList: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text("🌴 Hello Packing List:")
+                    Text("Packing List: ")
                         .font(.system(size: 40))
                         .fontWeight(.black)
                     Spacer()
