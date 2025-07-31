@@ -1,3 +1,4 @@
+
 import SwiftUI
 import SwiftData
 
@@ -9,6 +10,7 @@ struct NewItineraryView: View {
 
     var body: some View {
         NavigationStack {
+
             ZStack {
                 Color(red: 1.00, green: 0.91, blue: 0.93) // background color
                     .ignoresSafeArea()
@@ -33,6 +35,27 @@ struct NewItineraryView: View {
                 .padding()
             }
             .navigationTitle("🌺🍍⛱️ New Item")
+
+            VStack(spacing: 16) {
+                Text("Items Needed:")
+                    .font(.headline)
+                TextField("Enter the item needed...", text: $title, axis: .vertical)
+                    .textFieldStyle(.roundedBorder)
+
+                Toggle("Is it essential?", isOn: $isImportant)
+
+                Button("Save") {
+                    let newItem = ItemNeeded(title: title, isImportant: isImportant)
+                    modelContext.insert(newItem)
+                    showNewTask = false
+                }
+                .buttonStyle(.borderedProminent)
+
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("New Item")
+
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -43,6 +66,7 @@ struct NewItineraryView: View {
         }
     }
 }
+
 
 #Preview {
     NewItineraryView(showNewTask: .constant(true))
