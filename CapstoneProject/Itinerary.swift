@@ -29,6 +29,7 @@ struct Itinerary: View {
                                    VStack (alignment: .center) {
                                        VStack (spacing: 5) {
                                            Text("\(dest1)")
+                                               .padding(.top,20)
                                                .foregroundColor(Color(red: 0.85,green:0.40,blue:0.47))
                                                .frame(alignment: .leading)
                                                .font(.system(size:40))
@@ -39,13 +40,19 @@ struct Itinerary: View {
                                                .fontWeight(.heavy)
                                                .foregroundColor(Color.black)
                                            summary1
+                                               .padding()
+                                               .background(Color(red:0.29,green:0.76,blue:0.655))
+                                               .cornerRadius(10)
+                                               .fontWeight(.heavy)
+                                               .foregroundColor(.white)
+                                               .padding(.vertical)
                                            if let days = tripLength1 {
                                                if days > 1 {
                                                    Text("You will spend \(days) days in \(dest1)")
                                                }
                                            }
                                        }
-                                       .padding(.bottom, 80)
+                                       .padding(.bottom, 40)
                                        VStack {
                                            MultiDatePicker("Select a Date", selection: $selectedDatesDest1, in: Date.now...)
                                                .tint(Color(red:0.29,green:0.76,blue:0.655))
@@ -83,6 +90,7 @@ struct Itinerary: View {
                                    VStack {
                                        VStack (spacing: 5) {
                                            Text("\(dest2)")
+                                               .padding(.top,20)
                                                .foregroundColor(Color(red: 0.85,green:0.40,blue:0.47))
                                                .frame(alignment: .leading)
                                                .font(.system(size:40))
@@ -93,13 +101,19 @@ struct Itinerary: View {
                                                .fontWeight(.heavy)
                                                .foregroundColor(Color.black)
                                            summary2
+                                               .padding()
+                                               .background(Color(red:0.29,green:0.76,blue:0.655))
+                                               .cornerRadius(10)
+                                               .fontWeight(.heavy)
+                                               .foregroundColor(.white)
+                                               .padding(.vertical)
                                            if let days = tripLength2 {
                                                if days > 1 {
                                                    Text("You will spend \(days) days in \(dest2)")
                                                }
                                            }
                                        }
-                                       .padding(.bottom, 80)
+                                       .padding(.bottom, 40)
                                        VStack {
                                            MultiDatePicker("Select a Date", selection: $selectedDatesDest2, in: Date.now...)
                                                .tint(Color(red:0.29,green:0.76,blue:0.655))
