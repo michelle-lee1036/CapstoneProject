@@ -36,26 +36,9 @@ struct NewItineraryView: View {
             }
             .navigationTitle("🌺🍍⛱️ New Item")
 
-            VStack(spacing: 16) {
-                Text("Items Needed:")
-                    .font(.headline)
-                TextField("Enter the item needed...", text: $title, axis: .vertical)
-                    .textFieldStyle(.roundedBorder)
+           
 
-                Toggle("Is it essential?", isOn: $isImportant)
-
-                Button("Save") {
-                    let newItem = ItemNeeded(title: title, isImportant: isImportant)
-                    modelContext.insert(newItem)
-                    showNewTask = false
-                }
-                .buttonStyle(.borderedProminent)
-
-                Spacer()
-            }
-            .padding()
-            .navigationTitle("New Item")
-
+            /*
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -63,6 +46,7 @@ struct NewItineraryView: View {
                     }
                 }
             }
+ */
         }
     }
 }

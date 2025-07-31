@@ -11,7 +11,7 @@ struct TripPage: View {
   let dates1: [Date]
   let dates2: [Date]
   @State private var selectedDestination: String? = nil
-  var tripName = "Your trip :airplane:"
+  var tripName = "Your trip ✈️"
   var body: some View {
     NavigationStack {
       ZStack {
