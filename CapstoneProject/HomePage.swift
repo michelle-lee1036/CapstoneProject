@@ -108,7 +108,7 @@ struct HomePage: View {
     ContentView()
 }
         
-        
+        //fix the countdown clock later
         //how to add in navigation bar to the homepage so that the user can actually go to all the different slides that are going to be on the app. (NEED BUTTONS, but HOW)
         //figured out the navigation bar thing
         //need to figure out how to make the countdown clock less work for user
