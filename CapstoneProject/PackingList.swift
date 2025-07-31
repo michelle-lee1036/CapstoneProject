@@ -38,6 +38,7 @@ struct PackingList: View {
                                     .fontWeight(.bold)
                             } else {
                                 Text(toDoItem.title)
+                                    .fontWeight(.bold)
                             }
                             Spacer()
                         }
