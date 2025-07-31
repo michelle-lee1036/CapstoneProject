@@ -9,37 +9,48 @@ import SwiftUI
 
 struct Tokyo: View {
     var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            Image("tokyo")
-                .renderingMode(.none)
-                .resizable(capInsets: EdgeInsets())
-                .aspectRatio(contentMode: .fit)
-            Text("Tokyo!")
-                .font(.title)
-                .fontWeight(.bold)
-            Text(" ")
+        ZStack {
+            Color(red: 0.63, green: 0.78, blue: 0.87)
+                .ignoresSafeArea()
 
-            Text("Common Illnesses:")
-                .font(.title3)
-                .fontWeight(.bold)
+            VStack(alignment: .center, spacing: 8) {
+                Image("tokyo")
+                    .renderingMode(.none)
+                    .resizable(capInsets: EdgeInsets())
+                    .aspectRatio(contentMode: .fit)
 
-            Text("- Respiratory infections: Common cold, influenza")
-            Text("- Gastorintestinal illnesses: Travelers diarrhea, stomach flu")
-            Text(" ")
+                Text("Tokyo!")
+                    .font(.title)
+                    .fontWeight(.bold)
 
-            Text("Air Quality:")
-                .font(.title3)
-                .fontWeight(.bold)
+                Text(" ")
 
-            Text("- Generally good with occasional pollen")
-            Text(" ")
-            Text("Other things to note:")
-                .font(.title3)
-                .fontWeight(.bold)
+                Text("Common Illnesses:")
+                    .font(.title3)
+                    .fontWeight(.bold)
 
-            Text("- Possible natrual disasters: Earthquakes, typhoons, flooding")
-                }
+                Text("- Respiratory infections: Common cold, influenza")
+                Text("- Gastorintestinal illnesses: Travelers diarrhea, stomach flu")
+
+                Text(" ")
+
+                Text("Air Quality:")
+                    .font(.title3)
+                    .fontWeight(.bold)
+
+                Text("- Generally good with occasional pollen")
+
+                Text(" ")
+
+                Text("Other things to note:")
+                    .font(.title3)
+                    .fontWeight(.bold)
+
+                Text("- Possible natural disasters: Earthquakes, typhoons, flooding")
+            }
+            .padding()
         }
+    }
 }
 
 #Preview {
