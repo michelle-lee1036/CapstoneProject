@@ -1,39 +1,55 @@
-// NewItineraryView.swift
-// CapstoneProject
 //
-// Created by Scholar on 7/28/25.
+//  NewItineraryView.swift
+//  CapstoneProject
 //
+//  Created by Scholar on 7/31/25.
+//
+
 import SwiftUI
 import SwiftData
+
 struct NewItineraryView: View {
-  @Bindable var toDoItem: ItemNeeded
-  @Environment(\.modelContext) var modelContext
-  @Binding var showNewTask: Bool
-  var body: some View {
-    VStack {
-      Text("Items Needed:")
-      TextField("Enter the item needed...", text: $toDoItem.title, axis: .vertical)
-      Toggle(isOn: $toDoItem.isImportant) {
-        Text("Is it essential?")
-        Button {
-          addToDo()
-          showNewTask = false
-        } label: {
-            Text("Save")
+    @Environment(\.modelContext) var modelContext
+    @Binding var showNewTask: Bool
+    @State private var title: String = ""
+    @State private var isImportant: Bool = false
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 16) {
+                Text("Items Needed:")
+                    .font(.headline)
+                TextField("Enter the item needed...", text: $title, axis: .vertical)
+                    .textFieldStyle(.roundedBorder)
+
+                Toggle("Is it essential?", isOn: $isImportant)
+
+                Button("Save") {
+                    let newItem = ItemNeeded(title: title, isImportant: isImportant)
+                    modelContext.insert(newItem)
+                    showNewTask = false
+                }
+                .buttonStyle(.borderedProminent)
+
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("New Item")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        showNewTask = false
+                    }
+                }
+            }
         }
-      }
     }
-    .padding()
-  }
-  func addToDo() {
-    let toDo = ItemNeeded(title: toDoItem.title, isImportant: toDoItem.isImportant)
-    modelContext.insert(toDo)
-  }
 }
+
+
+
 #Preview {
-  NewItineraryView(
-    toDoItem: ItemNeeded(title: "", isImportant: false),
-    showNewTask: .constant(false)
-  )
+    NewItineraryView(showNewTask: .constant(true))
+        .modelContainer(for: ItemNeeded.self, inMemory: true)
 }
 
