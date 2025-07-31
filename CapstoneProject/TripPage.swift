@@ -21,7 +21,7 @@ struct TripPage: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(red:1.0,green:0.93,blue:0.95)
+                Color(red:1.0,green:0.95,blue:0.97)
                     .ignoresSafeArea()
                 VStack {
                     Text("\(tripName)")
