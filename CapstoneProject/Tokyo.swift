@@ -10,7 +10,7 @@ import SwiftUI
 struct Tokyo: View {
     var body: some View {
         ZStack {
-            Color(red: 0.29, green: 0.88, blue: 0.91)
+            Color(red: 0.63, green: 0.78, blue: 0.87)
                 .ignoresSafeArea()
 
             VStack(alignment: .center, spacing: 8) {

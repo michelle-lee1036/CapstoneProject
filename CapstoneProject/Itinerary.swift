@@ -29,10 +29,17 @@ struct Itinerary: View {
                             VStack (alignment: .center) {
                                 VStack (spacing: 5) {
                                     Text("\(dest1)")
+
                                         .foregroundColor(Color(red:0.29,green:0.76,blue:0.655))
                                         .frame(alignment: .leading)
                                         .font(.system(size:40))
                                         .fontWeight(.ultraLight)
+
+                                        .foregroundColor(Color(red: 0.85,green:0.40,blue:0.47))
+                                        .frame(alignment: .leading)
+                                        .font(.system(size:40))
+                                        .fontWeight(.bold)
+
                                     Text("Itinerary")
                                         .frame(alignment: .leading)
                                         .font(.system(size:50))
@@ -48,6 +55,10 @@ struct Itinerary: View {
                                 .padding(.bottom, 80)
                                 VStack {
                                     MultiDatePicker("Select a Date", selection: $selectedDatesDest1, in: Date.now...)
+
+
+                                        .tint(Color(red:0.29,green:0.76,blue:0.655))
+
                                         .frame(height: 400)
                                         .onChange(of: selectedDatesDest1) {
                                             if sortedDatesDest1.count == 2 {
@@ -56,11 +67,19 @@ struct Itinerary: View {
                                                 showNextButton = false
                                             }
                                         }
+
                                         .background(Color(red: 0.85,green:0.40,blue:0.47))
                                         .cornerRadius(15)
                                         .overlay (
                                             RoundedRectangle(cornerRadius: 15)
                                                 .stroke(Color(red:0.29,green:0.76,blue:0.655),lineWidth: 8)
+
+                                        .background(Color.white)
+                                        .cornerRadius(15)
+                                        .overlay (
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(Color(red: 0.85,green:0.40,blue:0.47),lineWidth: 8)
+
                                         )
                                         .shadow(color: .gray.opacity(0.8), radius: 4, x: 5, y: -3)
                                         .frame(height: 400)
@@ -82,10 +101,17 @@ struct Itinerary: View {
                             VStack {
                                 VStack (spacing: 5) {
                                     Text("\(dest2)")
+
                                         .foregroundColor(Color(red:0.91,green:0.55,blue:0.18))
                                         .frame(alignment: .leading)
                                         .font(.system(size:40))
                                         .fontWeight(.ultraLight)
+
+                                        .foregroundColor(Color(red: 0.85,green:0.40,blue:0.47))
+                                        .frame(alignment: .leading)
+                                        .font(.system(size:40))
+                                        .fontWeight(.bold)
+
                                     Text("Itinerary")
                                         .frame(alignment: .leading)
                                         .font(.system(size:40))
@@ -101,6 +127,8 @@ struct Itinerary: View {
                                 .padding(.bottom, 80)
                                 VStack {
                                     MultiDatePicker("Select a Date", selection: $selectedDatesDest2, in: Date.now...)
+
+                                        .tint(Color(red:0.29,green:0.76,blue:0.655))
                                         .frame(height: 400)
                                         .onChange(of: selectedDatesDest2) {
                                             if sortedDatesDest2.count == 2 {
@@ -114,11 +142,22 @@ struct Itinerary: View {
                                         .overlay (
                                             RoundedRectangle(cornerRadius: 15)
                                                 .stroke(Color(red:0.91,green:0.55,blue:0.18),lineWidth: 8)
+
+                                        .background(Color.white)
+                                        .cornerRadius(15)
+                                        .overlay (
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(Color(red: 0.85,green:0.40,blue:0.47),lineWidth: 8)
+
                                         )
                                         .shadow(color: .gray.opacity(0.8), radius: 4, x: 5, y: -3)
                                         .frame(height: 400)
                                 }
+
                                 .padding(.bottom, 50)
+
+                                .padding(.bottom, 30)
+
                                 VStack {
                                     if !overlappingDates.isEmpty {
                                         Text("Your selected dates for \(dest2) overlap with your time in \(dest1) ⚠️")
