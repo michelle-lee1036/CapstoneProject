@@ -18,66 +18,113 @@ struct HomePage: View {
     @State private var showAlert = false
     @State private var menuOpened = false
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         NavigationStack {
             ZStack {
+                Color(red: 1.9, green: 0.93, blue: 0.86)
+                    .ignoresSafeArea()
                 VStack(spacing: 20) {
                     Text("HEALTHMILES")
                         .font(.largeTitle)
                         .bold()
-                        .foregroundColor(Color(red: 0.416, green: 0.043, blue: 0.763))
-                        .frame(width: 300, height: 90)
-                        .border(Color.red, width: 5)
+                        .foregroundColor(Color(red: 0.91, green: 0.55, blue: 0.18))
+                        .frame(width: 280, height: 85)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color(red: 1.0, green: 0.91, blue: 0.93))
+                        )
+                        .border(Color(red: 0.99, green: 0.69, blue: 0.64), width: 5)
+
                     Divider()
                         .frame(height: 3)
-                        .overlay(.black)
-                        .padding(.bottom)
+                        .overlay((Color(red: 0.91, green: 0.55, blue: 0.18)))
+                        .padding()
                     Text("Countdown Clock ⏰")
+                        .font(.title)
                         .bold()
-                    if !countdownStarted {
-                        VStack {
-                            Stepper("Days: \(inputDays)", value: $inputDays, in: 0...365)
-                            Stepper("Hours: \(inputHours)", value: $inputHours, in: 0...23)
-                            Stepper("Minutes: \(inputMinutes)", value: $inputMinutes, in: 0...59)
-                            Stepper("Seconds: \(inputSeconds)", value: $inputSeconds, in: 0...59)
-                        }
-                        Button("Start Countdown") {
-                            let totalSeconds = inputDays * 86400 + inputHours * 3600 + inputMinutes * 60 + inputSeconds
-                            timeRemaining = totalSeconds
-                            targetDate = Date().addingTimeInterval(Double(totalSeconds))
-                            isPaused = false
-                            countdownStarted = true
-                        }
-                    } else {
-                        Text("Time remaining: \(formatTime(seconds: timeRemaining))")
-                            .onReceive(timer) { _ in
-                                if !isPaused && timeRemaining > 0 {
-                                    timeRemaining -= 1
-                                }
-                                if timeRemaining <= 0 {
-                                    isPaused = true
-                                    showAlert = true
-                                }
+                        .foregroundColor(Color(red: 0.29, green: 0.76, blue: 0.65)) //color of CountdownClock Text
+                    
+                    Group {
+                        if !countdownStarted {
+                            VStack {
+                                Stepper("Days: \(inputDays)", value: $inputDays, in: 0...365)
+                                    .tint(Color(red: 0.91, green: 0.55, blue: 0.18))
+                                    .foregroundColor(Color(red: 0.29, green: 0.76, blue:0.65))
+                                Stepper("Hours: \(inputHours)", value: $inputHours, in: 0...23)
+                                    .tint(Color(red: 0.91, green: 0.55, blue: 0.18))
+                                    .foregroundColor(Color(red: 0.29, green: 0.76, blue:0.65))
+                                Stepper("Minutes: \(inputMinutes)", value: $inputMinutes, in: 0...59)
+                                    .tint(Color(red: 0.91, green: 0.55, blue: 0.18))
+                                    .foregroundColor(Color(red: 0.29, green: 0.76, blue:0.65))
+                                Stepper("Seconds: \(inputSeconds)", value: $inputSeconds, in: 0...59)
+                                    .tint(Color(red: 0.91, green: 0.55, blue: 0.18))
+                                    .foregroundColor(Color(red: 0.29, green: 0.76, blue:0.65))
                             }
-                        HStack {
-                            Button("Pause") {
-                                isPaused = true
-                            }
-                            Button("Resume") {
+                            Button("Start Countdown") {
+                                let totalSeconds = inputDays * 86400 + inputHours * 3600 + inputMinutes * 60 + inputSeconds
+                                timeRemaining = totalSeconds
+                                targetDate = Date().addingTimeInterval(Double(totalSeconds))
                                 isPaused = false
+                                countdownStarted = true
                             }
-                            Button("Reset") {
-                                resetCountdown()
+                            .buttonStyle(.borderedProminent)
+                            .tint(Color(red: 0.99, green: 0.69, blue: 0.64))
+                            //button coloring above for start countdown
+                        } else {
+                            Text("Time remaining: \(formatTime(seconds: timeRemaining))")
+                                .font(.title2)
+                                .foregroundColor(Color(red: 0.91, green: 0.55, blue: 0.18))
+                                .onReceive(timer) { _ in
+                                    if !isPaused && timeRemaining > 0 {
+                                        timeRemaining -= 1
+                                    }
+                                    if timeRemaining <= 0 {
+                                        isPaused = true
+                                        showAlert = true
+                                    }
+                                }
+                            
+                            HStack(spacing: 20) {
+                                Button("Pause") {
+                                    isPaused = true
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(Color(red: 0.99, green: 0.69, blue: 0.64))
+                                //pause button coloring above
+                                
+                                Button("Resume") {
+                                    isPaused = false
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(Color(red: 0.99, green: 0.69, blue: 0.64))
+                                
+                                Button("Reset") {
+                                    resetCountdown()
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(Color(red: 0.99, green: 0.69, blue: 0.64))
+                                
                             }
                         }
                     }
-                }
-                .padding()
-                .alert("Trip has started!!!", isPresented: $showAlert) {
-                    Button("OK") {
-                        resetCountdown()
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .fill(Color(red: 1.0, green: 0.91, blue: 0.93))
+                        .padding()
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color(red: 0.99, green: 0.69, blue: 0.64), lineWidth: 4)
+                            .padding()
+                    )
+                
+                    .alert("Trip has started!!!", isPresented: $showAlert) {
+                        Button("OK") {
+                            resetCountdown()
+                        }
                     }
-                }
+                } //end brace of group function
             }
             //above is the closing brace for the zstack
         }
