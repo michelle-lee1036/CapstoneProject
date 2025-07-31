@@ -91,6 +91,7 @@ struct HomePage: View {
                                         showAlert = true
                                     }
                                 }
+                                .padding()
                             
                             HStack(spacing: 20) {
                                 Button("Pause") {
@@ -113,6 +114,7 @@ struct HomePage: View {
                                 .tint(Color(red: 0.99, green: 0.69, blue: 0.64))
                                 
                             }
+                            .padding()
                         }
                             
                     }
@@ -146,6 +148,7 @@ struct HomePage: View {
         let s = seconds % 60
         return String(format: "%02dd %02dh %02dm %02ds", d, h, m, s)
     }
+    
     func resetCountdown() {
         isPaused = true
         countdownStarted = false
