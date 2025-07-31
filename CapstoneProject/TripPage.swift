@@ -21,7 +21,7 @@ struct TripPage: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(red:1.0,green:0.91,blue:0.93)
+                Color(red:1.0,green:0.93,blue:0.95)
                     .ignoresSafeArea()
                 VStack {
                     Text("\(tripName)")
@@ -60,7 +60,7 @@ struct TripPage: View {
                     .navigationBarBackButtonHidden(true)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color(red:0.99,green:0.69,blue:0.64))
+                            .fill(Color(red:1.0,green:0.79,blue:0.74))
                             .shadow(color: .gray.opacity(0.6), radius: 5, x: 1, y: 1)
                     )
                     
@@ -85,7 +85,7 @@ struct TripPage: View {
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color(red:0.99,green:0.69,blue:0.64))
+                            .fill(Color(red:1.0,green:0.79,blue:0.74))
                     )
                 }
                 .padding()
