@@ -14,17 +14,18 @@ struct SideMenuHeaderView: View {
                 .imageScale(.large)
                 .foregroundStyle(.white)
                 .frame(width: 43, height: 43)
-                .background(.blue)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding(.vertical)
             
             VStack(alignment: .leading, spacing: 6) {
-                Text("Navigation Bar")
+                Text("Menu")
                     .font(.title)
-                
-               
+                    .foregroundColor(.white)
+                  
             }
+            
         }
+        
     }
 }
 

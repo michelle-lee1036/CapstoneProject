@@ -18,9 +18,11 @@ struct SideMenuRowView: View {
     var body: some View {
         HStack {
             Image(systemName: option.systemImageName)
+                .foregroundColor(.white)
                 .imageScale(.small)
                 
             Text(option.title)
+                .foregroundColor(.white)
                 .font(.subheadline)
             
             Spacer()
@@ -28,7 +30,11 @@ struct SideMenuRowView: View {
         .padding(.leading)
         .foregroundStyle(isSelected ? .blue: .primary)
         .frame(width: 216, height: 44)
-        .background(isSelected ? .blue.opacity(0.15): .clear)
+        .background(
+            isSelected
+            ? Color(red: 1.10, green: 0.69, blue: 0.64).opacity(0.15)
+            : .clear
+        )
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
