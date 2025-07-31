@@ -73,7 +73,7 @@ struct Itinerary: View {
                                         .overlay (
                                             RoundedRectangle(cornerRadius: 15)
                                                 .stroke(Color(red:0.29,green:0.76,blue:0.655),lineWidth: 8)
-
+                                            )
                                         .background(Color.white)
                                         .cornerRadius(15)
                                         .overlay (
@@ -142,7 +142,7 @@ struct Itinerary: View {
                                         .overlay (
                                             RoundedRectangle(cornerRadius: 15)
                                                 .stroke(Color(red:0.91,green:0.55,blue:0.18),lineWidth: 8)
-
+                                            )
                                         .background(Color.white)
                                         .cornerRadius(15)
                                         .overlay (
