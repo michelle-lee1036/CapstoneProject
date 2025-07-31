@@ -14,6 +14,11 @@ struct ContentView: View {
     @State private var newToDoItem = ItemNeeded(title: "", isImportant: false)
     @State private var showNewTask = false
     
+    @State private var dest1 = ""
+    @State private var dest2 = ""
+    @State private var dates1: [Date] = []
+    @State private var dates2: [Date] = []
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -24,17 +29,15 @@ struct ContentView: View {
                     MapSlide()
                         .tag(1)
                     
-                    Itinerary(dest1: "Paris", dest2: "New York")
+                    Itinerary(dest1: dest1, dest2: dest2)
                         .tag(2)
                     
-                    Text("Health")
+                    TripPage(dest1: dest1, dest2: dest2, dates1: dates1, dates2: dates2)
                         .tag(3)
                     
                     PackingList()
                         .tag(4)
                     
-                    Text("Notifications")
-                        .tag(5)
                 }
                 
                 SideMenuView(isShowing: $showMenu, selectedTab: $selectedTab)

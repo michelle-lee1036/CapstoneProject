@@ -13,7 +13,6 @@ enum SideMenuOptionModel: Int, CaseIterable {
     case itinerary
     case health
     case packinglist
-    case notifications
     
     var title: String {
         switch self {
@@ -27,8 +26,7 @@ enum SideMenuOptionModel: Int, CaseIterable {
             return "Health"
         case .packinglist:
             return"Packing List"
-        case .notifications:
-            return "Notifications"
+        
         }
     }
     
@@ -45,8 +43,6 @@ enum SideMenuOptionModel: Int, CaseIterable {
         return "cross"
         case .packinglist:
             return "backpack"
-        case .notifications:
-            return "bell"
         }
     }
 }
