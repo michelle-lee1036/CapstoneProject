@@ -20,7 +20,6 @@ struct TripPage: View {
     
     var body: some View {
         NavigationStack {
-            
             VStack {
                 Text("\(tripName)")
                     .font(.title)
