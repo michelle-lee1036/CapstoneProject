@@ -44,10 +44,15 @@ struct HomePage: View {
                         .font(.title)
                         .bold()
                         .foregroundColor(Color(red: 0.29, green: 0.76, blue: 0.65)) //color of CountdownClock Text
+                        .frame(width: 300, height: 70)
+                        .background(RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(red: 1.0, green: 0.91, blue: 0.93))
+                        )
+                        .border(Color(red: 0.99, green: 0.69, blue: 0.65), width: 5)
                     
                     Group {
                         if !countdownStarted {
-                            VStack {
+                            VStack(spacing: 20) {
                                 Stepper("Days: \(inputDays)", value: $inputDays, in: 0...365)
                                     .tint(Color(red: 0.91, green: 0.55, blue: 0.18))
                                     .foregroundColor(Color(red: 0.29, green: 0.76, blue:0.65))
@@ -61,6 +66,7 @@ struct HomePage: View {
                                     .tint(Color(red: 0.91, green: 0.55, blue: 0.18))
                                     .foregroundColor(Color(red: 0.29, green: 0.76, blue:0.65))
                             }
+                            .padding()
                             Button("Start Countdown") {
                                 let totalSeconds = inputDays * 86400 + inputHours * 3600 + inputMinutes * 60 + inputSeconds
                                 timeRemaining = totalSeconds
@@ -71,6 +77,7 @@ struct HomePage: View {
                             .buttonStyle(.borderedProminent)
                             .tint(Color(red: 0.99, green: 0.69, blue: 0.64))
                             //button coloring above for start countdown
+
                         } else {
                             Text("Time remaining: \(formatTime(seconds: timeRemaining))")
                                 .font(.title2)
@@ -107,6 +114,7 @@ struct HomePage: View {
                                 
                             }
                         }
+                            
                     }
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 15)
